@@ -4,32 +4,33 @@ import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
-import net.bramp.ffmpeg.probe.FFmpegFormat;
-import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 
 import java.io.IOException;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args ) throws IOException {
-        FFmpeg ffmpeg = new FFmpeg("/usr/bin/ffmpeg");
-        FFprobe ffprobe = new FFprobe("/usr/bin/ffprobe");
+        System.out.println("Hello Maven");
+        //System.out.println(args[0]);
+        //System.out.println(args[1]);
+        //FFmpeg ffmpeg = new FFmpeg("C://ffmpeg//bin//ffmpeg.exe");
+        FFmpeg ffmpeg = new FFmpeg();
+        //FFprobe ffprobe = new FFprobe("C://ffmpeg//bin//ffprobe.exe");
+        FFprobe ffprobe = new FFprobe();
 
 
-        System.out.println(args[0]);
-        System.out.println(args[1]);
+        //System.out.println(args[0]);
+        //System.out.println(args[1]);
 
         FFmpegBuilder builder = new FFmpegBuilder()
 
                 //.setInput("/home/titinho/Videos/CH_SLO/raw_video.mp4")     // Filename, or a FFmpegProbeResult
+                //.setInput("C://Videos//CH_SLO//raw_video.mp4")     // Filename, or a FFmpegProbeResult
                 .setInput(args[0])     // Filename, or a FFmpegProbeResult
                 .overrideOutputFiles(true) // Override the output if it exists
 
                 //.addOutput("/home/titinho/Videos/CH_SLO/raw_video_.mp4")   // Filename for the destination
+                //.addOutput("C://Videos//CH_SLO//___.mp4")   // Filename for the destination
                 .addOutput(args[1])   // Filename for the destination
                 .setFormat("mp4")        // Format is inferred from filename, or can be set
                 /*.setTargetSize(250_000)  // Aim for a 250KB file
@@ -44,7 +45,6 @@ public class App
                 .setVideoCodec("libx265")     // Video using x264
                 .setVideoFrameRate(24, 1)     // at 24 frames per second
                 //.setVideoResolution(640, 480) // at 640x480 resolution
-
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL) // Allow FFmpeg to use experimental specs
                 .done();
 
